@@ -3,20 +3,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import '../../style/colors.dart';
-import '../home/nav_bar.dart';
-import 'sign_up_screen.dart';
 
-class SignInScreen extends StatefulWidget {
-  const SignInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<SignInScreen> createState() => _SignInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignInScreenState extends State<SignInScreen> {
-  TextEditingController email = TextEditingController(),
-      password = TextEditingController();
-  bool _isPasswordVisible = false;
+class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController name = TextEditingController(),
+      email = TextEditingController(),
+      password = TextEditingController(),
+      cpassword = TextEditingController();
+  bool ps = false, cps = false;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -43,7 +43,7 @@ class _SignInScreenState extends State<SignInScreen> {
             top: 70,
             left: 20,
             child: Text(
-              "Let's get you Sign In!!!",
+              "Let's get you Sign Un!!!",
               style: TextStyle(
                   color: white, fontSize: 20, fontFamily: 'Merriweather'),
             ),
@@ -62,7 +62,7 @@ class _SignInScreenState extends State<SignInScreen> {
               )),
           Positioned(
             top: height / 5 - 30,
-            left: 25,
+            right: 25,
             child: Container(
               height: 50,
               width: width / 2 - 10,
@@ -72,7 +72,7 @@ class _SignInScreenState extends State<SignInScreen> {
               ),
               child: const Center(
                 child: Text(
-                  'Sign In',
+                  'Sign Up',
                   style: TextStyle(
                     color: white,
                     fontSize: 20,
@@ -84,11 +84,31 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
           Positioned(
-            top: height / 3 - 30,
+            top: height / 3 - 50,
             left: 10,
             right: 10,
             child: Column(
               children: [
+                SizedBox(
+                  height: 50,
+                  width: width,
+                  child: TextFormField(
+                    controller: name,
+                    decoration: const InputDecoration(
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                      labelText: 'Full Name',
+                      labelStyle: TextStyle(fontFamily: 'Merriweather'),
+                      border: OutlineInputBorder(),
+                      prefix: Icon(Icons.email),
+                      fillColor: Colors.grey,
+                      filled: true,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 SizedBox(
                   height: 50,
                   width: width,
@@ -114,7 +134,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   width: width,
                   child: TextFormField(
                     controller: password,
-                    obscureText: !_isPasswordVisible,
+                    obscureText: !ps,
                     obscuringCharacter: '*',
                     decoration: InputDecoration(
                       labelText: 'PassWord',
@@ -127,13 +147,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         color: Colors.black,
                       ),
                       suffixIcon: IconButton(
-                        icon: _isPasswordVisible
+                        icon: ps
                             ? const Icon(Icons.visibility)
                             : const Icon(Icons.visibility_off),
                         color: Colors.black,
                         onPressed: () {
                           setState(() {
-                            _isPasswordVisible = !_isPasswordVisible;
+                            ps = !ps;
                           });
                         },
                       ),
@@ -142,20 +162,41 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Forgot PassWord?',
-                        style: TextStyle(
-                          color: red,
-                          fontFamily: 'Merriweather',
-                        ),
+                const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 50,
+                  width: width,
+                  child: TextFormField(
+                    controller: cpassword,
+                    obscureText: !cps,
+                    obscuringCharacter: '*',
+                    decoration: InputDecoration(
+                      labelText: 'Confirm PassWord',
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 8),
+                      labelStyle: const TextStyle(fontFamily: 'Merriweather'),
+                      border: const OutlineInputBorder(),
+                      prefix: const Icon(
+                        Icons.lock,
+                        color: Colors.black,
                       ),
-                    )
-                  ],
+                      suffixIcon: IconButton(
+                        icon: cps
+                            ? const Icon(Icons.visibility)
+                            : const Icon(Icons.visibility_off),
+                        color: Colors.black,
+                        onPressed: () {
+                          setState(() {
+                            cps = !cps;
+                          });
+                        },
+                      ),
+                      fillColor: Colors.grey,
+                      filled: true,
+                    ),
+                  ),
                 ),
                 const SizedBox(
                   height: 25,
@@ -163,7 +204,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: GestureDetector(
-                    onTap: () => Get.off(const BottomNavBar()),
+                    onTap: () {},
                     child: Container(
                       height: 50,
                       width: width,
@@ -173,7 +214,7 @@ class _SignInScreenState extends State<SignInScreen> {
                       ),
                       child: const Center(
                         child: Text(
-                          'Log In',
+                          'Register',
                           style: TextStyle(
                             color: white,
                             fontWeight: FontWeight.bold,
@@ -204,7 +245,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   ],
                 ),
                 const SizedBox(
-                  height: 20,
+                  height: 15,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -250,16 +291,16 @@ class _SignInScreenState extends State<SignInScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: width / 4,
+                  height: width / 7,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     const Text('Already have an account? '),
                     GestureDetector(
-                      onTap: () => Get.to(const SignUpScreen()),
+                      onTap: () => Get.back(),
                       child: const Text(
-                        'Register Here',
+                        'LogIn Here',
                         style: TextStyle(color: red, fontSize: 18),
                       ),
                     )
