@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getxpro/style/colors.dart';
 
-import '../log/sign_in_screen.dart';
+import '../log/screen/sign_in_screen.dart';
 
 class SlashScreen extends StatefulWidget {
   const SlashScreen({

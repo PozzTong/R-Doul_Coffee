@@ -14,7 +14,7 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar('Menu', context, search: searchController),
+      appBar: customAppBar('Menus', context, search: searchController),
     );
   }
 }
